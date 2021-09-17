@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CryptoCoinApp</string>
+    <string name="error_retrieving_data">Error Retrieving Data!</string>
+    <string name="rank">Rank</string>
+    <string name="symbol">Symbol</string>
+    <string name="name">Name</string>
+    <string name="percentage">%</string>
+    <string name="value">Value</string>
+</resources>
