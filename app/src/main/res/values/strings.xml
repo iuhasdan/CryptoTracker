@@ -6,4 +6,9 @@
     <string name="name">Name</string>
     <string name="percentage">%</string>
     <string name="value">Value</string>
+    <string name="bitcoin">Bitcoin</string>
+    <string name="one_hundred_k">$100,000</string>
+    <string name="rank_symbol">#</string>
+    <string name="_24h">24h</string>
+    <string name="price">Price</string>
 </resources>
