@@ -15,7 +15,7 @@
         <activity android:name="com.example.cryptocoinapp.presentation.view.MainActivity"
             android:exported="true"
             android:label="CryptoCoinApp"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.CryptoCoinApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

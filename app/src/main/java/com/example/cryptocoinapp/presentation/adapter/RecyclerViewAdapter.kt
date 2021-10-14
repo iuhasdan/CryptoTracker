@@ -45,10 +45,6 @@ class RecyclerViewAdapter @Inject constructor(
         }
     }
 
-//    interface OnItemClickListener {
-//        fun onCoinClick(position: Int)
-//    }
-
     interface CoinClickListener {
         fun onCoinClicked(coin: Coin)
     }

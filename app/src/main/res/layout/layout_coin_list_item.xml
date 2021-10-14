@@ -22,8 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="4dp"
+        android:background="@color/dark_gray"
+        android:layout_margin="10dp"
         android:onClick="@{() ->  coinItemClick.onCoinClicked(listItem)}"
-        app:cardElevation="15dp">
+
+        >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
+            android:background="@color/primary"
             android:orientation="horizontal">
 
             <TextView
@@ -41,6 +44,7 @@
                 android:layout_marginStart="16dp"
                 android:text="@{Integer.toString(listItem.cmcRank)}"
                 android:textSize="18sp"
+                style="@style/GreenText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/constraint_layout_id"
                 tools:text="1" />
@@ -63,6 +67,7 @@
                 android:layout_marginStart="16dp"
                 android:text="@{listItem.name}"
                 android:textSize="18sp"
+                style="@style/GreenText"
                 app:layout_constraintStart_toEndOf="@id/rank_tv"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Bitcoin" />
@@ -73,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:maxLength="4"
+                style="@style/GreenText"
                 android:textColor="@{(listItem.percentChange24h &lt;= 0.0) ? @color/red : @color/green}"
-
                 android:text="@{listItem.percentChange24h &lt;= 0.0 ? Double.toString(listItem.percentChange24h) : ('+' + Double.toString(listItem.percentChange24h))}"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@id/value_tv"
@@ -87,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:maxLength="7"
+                style="@style/GreenText"
                 android:text="@{Double.toString(listItem.price)}"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CryptoCoinApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.CryptoCoinApp" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/primary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primary</item>
         <item name="colorSecondaryVariant">@color/primary</item>
@@ -14,12 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.CryptoCoinApp.NoActionBar">
+    <style name="Theme.CryptoCoinApp.NoActionBar" parent="Theme.MaterialComponents.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.CryptoCoinApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+<!--    <style name="Theme.CryptoCoinApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
 
-    <style name="Theme.CryptoCoinApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<!--    <style name="Theme.CryptoCoinApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 </resources>
