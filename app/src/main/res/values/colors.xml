@@ -8,4 +8,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#32CD32</color>
     <color name="red">#E32636</color>
+    <color name="white_grey">#bab0af</color>
+    <color name="black_grey">#424242</color>
+    <color name="reddit_orange">#FF5700</color>
+    <color name="twitter_blue">#1DA1F2</color>
+    <color name="github_black">#333</color>
 </resources>

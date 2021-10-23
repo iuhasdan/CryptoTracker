@@ -17,9 +17,8 @@ class GetCoinUseCase @Inject constructor(
     operator fun invoke(coinId: String): Flow<Resource<CoinDetail>> = flow {
         try {
             emit(Resource.Loading<CoinDetail>())
-            val coin = repository.getCoinById(coinId)
-            val coin2 = coin.toCoinDetail()
-            emit(Resource.Success<CoinDetail>(coin2))
+            val coin = repository.getCoinById(coinId).toCoinDetail()
+            emit(Resource.Success<CoinDetail>(coin))
         } catch (e: HttpException) {
             emit(Resource.Error<CoinDetail>(e.localizedMessage ?: "An unexpected error occured"))
         } catch (e: IOException) {

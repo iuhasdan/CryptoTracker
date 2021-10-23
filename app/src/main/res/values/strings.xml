@@ -15,4 +15,10 @@
     <string name="percent">%</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_retrieving_coin">Error retrieving Coin!</string>
+    <string name="concat">%1$.2f%2$s</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
+    <string name="github">Github</string>
+
 </resources>

@@ -8,8 +8,21 @@
 
         <variable
             name="coinDetail"
-            type="com.example.cryptocoinapp.domain.model.CoinDetail" />
+            type="com.example.cryptocoinapp.presentation.coin_detail.CoinDetailState" />
+
+        <variable
+            name="coin"
+            type="com.example.cryptocoinapp.domain.model.Coin" />
+
+        <variable
+            name="coinFragment"
+            type="com.example.cryptocoinapp.presentation.view.CoinDetailFragment" />
+        
+        <variable
+            name="handler"
+            type="com.example.cryptocoinapp.common.utils.Handler" />
     </data>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,14 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
+            android:layout_gravity="center_horizontal"
             tools:context=".presentation.view.CoinDetailFragment">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rank_tv"
                 style="@style/GreenText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:textSize="20sp"
+                android:text="@{Integer.toString(coin.cmcRank)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="#1" />
@@ -41,51 +56,61 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/bc_logo" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/coin_name_tv"
                 style="@style/GreenText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="fill_vertical"
+                android:textSize="28sp"
                 app:layout_constraintStart_toEndOf="@id/logo_tv"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/bitcoin" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/price_tv"
                 style="@style/GreenText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:ellipsize="end"
+                android:text="@{Double.toString(coin.price)}"
                 android:maxLength="8"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rank_tv"
                 tools:text="@string/one_hundred_k" />
 
-            <TextView
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/percent_change_tv"
                 style="@style/GreenText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="5"
-                app:layout_constraintEnd_toStartOf="@+id/percent_symbol_tv"
+                android:maxLength="7"
+                android:textSize="24sp"
+                android:textColor="@{(coin.percentChange24h &lt;= 0.0) ? @color/red : @color/green}"
+                android:text="@{@string/concat(coin.percentChange24h,@string/percentage)}"
+
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rank_tv"
                 tools:text="3%" />
 
-            <TextView
-                android:id="@+id/percent_symbol_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/percent"
-                style="@style/GreenText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rank_tv" />
-
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/description_tv"
                 style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@{coinDetail.component2().description}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/price_tv"
+                app:layout_constraintTop_toBottomOf="@id/line_chart"
                 tools:text="@string/bitcoin_description" />
 
             <LinearLayout
@@ -102,22 +127,59 @@
                     android:id="@+id/tag_names_chips"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_margin="6dp"
                     app:chipSpacingHorizontal="1dp"
                     app:chipSpacingVertical="2dp"
                     app:theme="@style/Theme.MaterialComponents" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:elevation="15dp"
+                    android:textColor="@color/reddit_orange"
+                    android:layout_gravity="center_horizontal"
+                    app:cornerRadius="8dp"
+                    android:drawablePadding="6dp"
+                    android:onClick="@{(v) -> handler.onClickMethodReference(coinDetail.component2().urls.reddit[0].toString(), v)}"
+                    android:drawableLeft="@drawable/ic_reddit"
+                    android:text="@string/reddit" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:elevation="15dp"
+                    android:textColor="@color/twitter_blue"
+                    android:layout_gravity="center_horizontal"
+                    app:cornerRadius="8dp"
+                    android:drawablePadding="6dp"
+                    android:onClick="@{(v) -> handler.onClickMethodReference(coinDetail.component2().urls.twitter[0].toString(), v)}"
+                    android:drawableLeft="@drawable/ic_twitter"
+                    android:text="@string/twitter" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:elevation="15dp"
+                    android:textColor="@color/white_grey"
+                    android:layout_gravity="center_horizontal"
+                    app:cornerRadius="8dp"
+                    android:drawablePadding="6dp"
+                    android:onClick="@{(v) -> handler.onClickMethodReference(coinDetail.component2().urls.sourceCode[0].toString(), v)}"
+                    android:drawableLeft="@drawable/ic_github"
+                    android:text="@string/github" />
             </LinearLayout>
-
-
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/line_chart"
-                style="@style/GreenText"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chips_layout" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

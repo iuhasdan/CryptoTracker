@@ -1,9 +1,9 @@
 package com.example.cryptocoinapp.di
 
 import com.example.cryptocoinapp.common.Constants
-import com.example.cryptocoinapp.data.remote.CoinMarketService
-import com.example.cryptocoinapp.data.repository.CoinRepository
-import com.example.cryptocoinapp.data.repository.CoinRepositoryImpl
+import com.example.cryptocoinapp.data.remote.CoinStatsService
+import com.example.cryptocoinapp.data.repository.HistoricalCoinDataRepository
+import com.example.cryptocoinapp.data.repository.HistoricalCoinDataRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +16,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object AppModule2 {
+
+    private const val BLOCKCHAIN_API_URL = "https://api.coinstats.app/"
 
     @Provides
     @Singleton
-    fun provideCoinMarketCapApi(): CoinMarketService {
+    fun proviceCoinStatsApi(): CoinStatsService {
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.apply { interceptor.level = HttpLoggingInterceptor.Level.BODY }
@@ -30,16 +32,16 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(BLOCKCHAIN_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-            .create(CoinMarketService::class.java)
+            .create(CoinStatsService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideCoinRepository(api: CoinMarketService): CoinRepository {
-        return CoinRepositoryImpl(api)
+    fun provideCoinRepository(api: CoinStatsService): HistoricalCoinDataRepository {
+        return HistoricalCoinDataRepositoryImpl(api)
     }
 }

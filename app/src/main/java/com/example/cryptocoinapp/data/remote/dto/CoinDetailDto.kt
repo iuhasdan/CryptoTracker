@@ -34,8 +34,8 @@ data class DetailItem(
 )
 
 
-fun CoinDetailDto.toCoinDetail(): CoinDetail {
-    return CoinDetail(
+fun CoinDetailDto.toCoinDetail(): CoinDetail
+    = CoinDetail(
         id = detailData.values.toTypedArray()[0].id,
         name = detailData.values.toTypedArray()[0].name,
         symbol = detailData.values.toTypedArray()[0].symbol,
@@ -44,4 +44,3 @@ fun CoinDetailDto.toCoinDetail(): CoinDetail {
         tagNames = detailData.values.toTypedArray()[0].tagNames,
         urls = detailData.values.toTypedArray()[0].urls
     )
-}
